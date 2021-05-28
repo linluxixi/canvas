@@ -5,18 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>画板</title>
+    <!-- css样式文件的引入 -->
+    <!-- 重置默认样式 -->
+    <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <div>
-      你好呀
-      <p>好开心，提交成功了</p>
-      <h1>试试第三次提交</h1>
-      <!-- git提交方法，修改后，在有.git的文件夹下右击出现git bash -->
-      <ul>
-        <li>git add .</li>
-        <li>git commit -m "日志"</li>
-        <li>git push origin(远程主机名) main(分支名)</li>
-      </ul>
-    </div>
+    <div id="canvas"></div>
+    <script>
+      canvas.onclick = (e) => {
+        console.log(e.clientX)
+        console.log(e.clientY)
+        //console.log调试大法
+        let div = document.createElement('div')
+        div.style.position = 'absolute'
+        div.style.left = e.clientX + 'px'
+        div.style.top = e.clientY + 'px'
+        div.style.border = '1px solid red'
+        div.style.width = '16px'
+        div.style.height = '16px'
+        div.style.marginLeft = '-8px'
+        div.style.marginTop = '-8px'
+        div.style.borderRadius = '50%'
+        div.style.background = 'red'
+        canvas.appendChild(div)
+      }
+    </script>
   </body>
 </html>
