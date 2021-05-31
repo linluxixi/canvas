@@ -1,4 +1,13 @@
+/* 重置默认样式，设置后不会有滑动条 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/*块级元素设置宽高生效，inner内联元素设置宽高不生效，100vh(和屏幕一样高)，100vw(和屏幕一样宽)  */
 #canvas {
   height: 100vh;
+  width: 100vw;
   border: 1px solid red;
+  display: block;
 }
