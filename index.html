@@ -20,30 +20,57 @@
       let ctx = canvas.getContext('2d')
       let painting = false
       ctx.fillStyle = 'black'
-      //   ctx.fillRect(10, 10, 55, 78)
-      canvas.onmousedown = () => {
-        painting = true
-      }
-
-      canvas.onmousemove = (e) => {
-        if (painting === true) {
-          console.log(e.clientX - 5, e.clientY - 5)
-          //   ctx.fillRect(e.clientX - 5, e.clientY - 5, 10, 10)
-          //   var circle = new Path2D()
-          //   circle.moveTo(e.clientX + 20, e.clientY - 30)
-          //   circle.arc(e.clientX - 5, e.clientY - 5, 5, 0, 2 * Math.PI)
-          //   ctx.fill(circle)
+      // ***************************************************手机触摸事件**********************************************
+      var isTouchDevice = 'ontouchstart' in document.documentElement
+      if (isTouchDevice) {
+        canvas.ontouchmove = (e) => {
+          // console.log(e)  调试
+          // 开始路径
           ctx.beginPath()
-          ctx.arc(e.clientX - 5, e.clientY - 5, 5, 0, 2 * Math.PI)
+          ctx.arc(
+            e.touches[0].clientX - 5,
+            e.touches[0].clientY - 5,
+            5,
+            0,
+            2 * Math.PI
+          )
+          //边线
           ctx.stroke()
+          // 填充
           ctx.fill()
-        } else {
-          console.log('no')
         }
-      }
+      } else {
+        // ************************************** 浏览器上画点*********************************************************
+        // 监听画板上的鼠标点击事件
+        canvas.onmousedown = () => {
+          painting = true
+        }
+        // 浏览器会调用canvas.onmousemove, 事件相关信息名字不重要
+        // canvas.onmousemove(事件相关信息)
+        // 监听画板上的鼠标移动事件
+        canvas.onmousemove = (e) => {
+          if (painting === true) {
+            console.log(e.clientX - 5, e.clientY - 5)
+            //   ctx.fillRect(e.clientX - 5, e.clientY - 5, 10, 10)
+            //   var circle = new Path2D()
+            //   circle.moveTo(e.clientX + 20, e.clientY - 30)
+            //   circle.arc(e.clientX - 5, e.clientY - 5, 5, 0, 2 * Math.PI)
+            //   ctx.fill(circle)
+            // 开始路径
+            ctx.beginPath()
+            ctx.arc(e.clientX - 5, e.clientY - 5, 5, 0, 2 * Math.PI)
+            ctx.stroke()
+            // 填充
+            ctx.fill()
+          } else {
+            console.log('no')
+          }
+        }
 
-      canvas.onmouseup = () => {
-        painting = false
+        // 监听画板上的鼠标拿起事件
+        canvas.onmouseup = () => {
+          painting = false
+        }
       }
     </script>
   </body>
